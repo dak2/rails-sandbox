@@ -1,0 +1,64 @@
+<div class="microblog-container">
+  <header class="microblog-header">
+    <h1>Microblog</h1>
+  </header>
+
+  <!-- New Post Form -->
+  <div class="new-post-section">
+    <%= form_with model: @post, local: true, class: "new-post-form" do |form| %>
+      <div class="form-group">
+        <%= form.text_area :content, placeholder: "What's happening?", rows: 3, class: "post-textarea", maxlength: 280 %>
+        <div class="character-count">
+          <span id="char-count">0</span>/280
+        </div>
+      </div>
+      
+      <% if @post.errors.any? %>
+        <div class="error-messages">
+          <% @post.errors.full_messages.each do |message| %>
+            <p class="error"><%= message %></p>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <div class="form-actions">
+        <%= form.submit "Post", class: "post-button" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Posts Feed -->
+  <div class="posts-feed">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <%= render 'post', post: post %>
+      <% end %>
+    <% else %>
+      <div class="empty-state">
+        <p>No posts yet. Be the first to share something!</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const textarea = document.querySelector('.post-textarea');
+    const charCount = document.getElementById('char-count');
+    
+    if (textarea && charCount) {
+      textarea.addEventListener('input', function() {
+        const count = this.value.length;
+        charCount.textContent = count;
+        
+        if (count > 280) {
+          charCount.style.color = '#e74c3c';
+        } else if (count > 250) {
+          charCount.style.color = '#f39c12';
+        } else {
+          charCount.style.color = '#7f8c8d';
+        }
+      });
+    }
+  });
+</script>

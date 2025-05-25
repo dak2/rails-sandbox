@@ -1,0 +1,10 @@
+<article class="post">
+  <div class="post-content">
+    <p><%= simple_format(post.content) %></p>
+  </div>
+  <div class="post-meta">
+    <time class="post-timestamp" datetime="<%= post.created_at.iso8601 %>">
+      <%= time_ago_in_words(post.created_at) %> ago
+    </time>
+  </div>
+</article>
