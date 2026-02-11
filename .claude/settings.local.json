@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bundle exec rails test:*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "mcp__upgrade-rails-mcp__deprecated_method_scanner",
+      "Bash(rg:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)"
+    ],
+    "deny": []
+  }
+}
